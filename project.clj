@@ -5,6 +5,8 @@
   :dependencies [
                  [org.clojure/clojure "1.10.0"]
                  [criterium "0.4.4"]
+                 [iota "1.1.3"]
+                 [squeezer "0.4.0"]
                  ]
   :repl-options {:init-ns hello-world.core}
   :main hello.world
