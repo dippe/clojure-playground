@@ -8,12 +8,12 @@
 ;(use '[learn.mapregex])
 
 ; min size is 101 otherwise the partitioning won't work properly in some cases
-(def ^:const size 100000)
+(def ^:const size 50000)
 (def ^:const line-length 400)
 (def ^:const pattern #"(?i)199")
 
 ; fully random data
-(def init-data (repeatedly size (fn [] (repeatedly line-length #(rand-int 100)))))
+(def init-data (repeatedly size (fn [] (repeatedly line-length #(rand-int 10)))))
 
 ; size times a randomly generated line
 ;(def init-data (repeat size (repeatedly line-length #(rand-int 100))))
