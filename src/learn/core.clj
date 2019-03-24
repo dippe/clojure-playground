@@ -7,9 +7,19 @@
 ;(require '[learn.mapregex :as rt])
 ;(use '[learn.mapregex])
 
-(def count 100000)
+; min size is 101 otherwise the partitioning won't work properly in some cases
+(def ^:const size 100000)
+(def ^:const line-length 400)
+(def ^:const pattern #"(?i)199")
 
-(def init-data (repeat count (range 1100)))
+; fully random data
+(def init-data (repeatedly size (fn [] (repeatedly line-length #(rand-int 100)))))
+
+; size times a randomly generated line
+;(def init-data (repeat size (repeatedly line-length #(rand-int 100))))
+
+; simlpe incremental test data
+;(def init-data (repeat size (range 1100)))
 
 (defn all-bench [num flist]
   (map (fn [name undertest]
@@ -19,13 +29,13 @@
          ) flist)
   )
 
-(defn all-bench-ugly [init-data]
-  (time ( println "rt/t_tesser \n" ( rt/t_tesser init-data)))
-  (time ( println "rt/t_rmap \n" ( rt/t_rmap init-data)))
-  (time ( println "rt/t_pmap_double \n" ( rt/t_pmap_double init-data)))
-  (time ( println "rt/t_pmap_part \n" ( rt/t_pmap_part init-data)))
-  (time ( println "rt/t_pmap_single \n" ( rt/t_pmap_single init-data)))
-  (time ( println "rt/t_simple \n" ( rt/t_simple init-data)))
+(defn all-bench-ugly [pattern init-data]
+  (time ( println "rt/t_tesser \n" ( rt/t_tesser pattern init-data)))
+  (time ( println "rt/t_rmap \n" ( rt/t_rmap pattern init-data)))
+  (time ( println "rt/t_pmap_double \n" ( rt/t_pmap_double pattern init-data)))
+  (time ( println "rt/t_pmap_part \n" ( rt/t_pmap_part pattern init-data)))
+  (time ( println "rt/t_pmap_single \n" ( rt/t_pmap_single pattern init-data)))
+  (time ( println "rt/t_simple \n" ( rt/t_simple pattern init-data)))
 )
 
 (defn -main []
@@ -40,9 +50,9 @@
   ;                })
 
   ;pre-load init-data
-  (nth init-data (- count 1))
+  (nth init-data (- size 1))
 
-  (all-bench-ugly init-data)
+  (all-bench-ugly pattern init-data)
   (System/exit 0)
   )
 

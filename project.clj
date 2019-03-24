@@ -9,6 +9,7 @@
                  [iota "1.1.3"]
                  [squeezer "0.4.0"]
                  [tesser.core "1.0.3"]
+                 [org.clojure/tools.trace "0.7.10"]
                  ]
   :main learn.core
   ;:aot [learn.core]
