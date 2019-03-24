@@ -12,41 +12,47 @@ Simple perf test of different map implementations
 
 *results:*
 - rt/t_tesser
-  -  found regex: 16543
-  - "Elapsed time: 20866.753639 msecs"
+  - 19692
+  - "Elapsed time: 1341.326938 msecs"
 - rt/t_rmap
-  -  found regex: 16543
-  - "Elapsed time: 4415.491457 msecs"
+  - 19692
+  - "Elapsed time: 4616.878361 msecs"
 - rt/t_pmap_double
-  -  found regex: 16543
-  - "Elapsed time: 1392.398246 msecs"
+  - 19692
+  - "Elapsed time: 770.92377 msecs"
 - rt/t_pmap_part
-  -  found regex: 16543
-  - "Elapsed time: 3641.134427 msecs"
+  - 19692
+  - "Elapsed time: 5052.190332 msecs"
 - rt/t_pmap_single
-  -  found regex: 16543
-  - "Elapsed time: 549.194523 msecs"
+  - 19692
+  - "Elapsed time: 625.481177 msecs"
 - rt/t_simple
-  -  found regex: 16543
-  - "Elapsed time: 3485.683274 msecs"
+  - 19692
+  - "Elapsed time: 4938.270507 msecs"
+- rt/t_future
+  - 19692
+  - "Elapsed time: 4954.324755 msecs"
   
   
 *I7 4 core (8HT) results*
 - rt/t_tesser
-  - 16384
-  - "Elapsed time: 4820.7045 msecs"
+  - 19798
+  - "Elapsed time: 483.5542 msecs"
 - rt/t_rmap
-  - 16384
-  - "Elapsed time: 1307.1558 msecs"
+  - 19798
+  - "Elapsed time: 1419.7344 msecs"
 - rt/t_pmap_double
-  - 16384
-  - "Elapsed time: 396.1423 msecs"
+  - 19798
+  - "Elapsed time: 456.5823 msecs"
 - rt/t_pmap_part
-  - 16384
-  - "Elapsed time: 1144.9652 msecs"
+  - 19798
+  - "Elapsed time: 1569.3695 msecs"
 - rt/t_pmap_single
-  - 16384
-  - "Elapsed time: 324.94 msecs"
+  - 19798
+  - "Elapsed time: 433.8762 msecs"
 - rt/t_simple
-  - 16384
-  - "Elapsed time: 1111.4171 msecs"
+  - 19798
+  - "Elapsed time: 1287.8339 msecs"
+- rt/t_future
+  - 19798
+  - "Elapsed time: 1355.0535 msecs"
