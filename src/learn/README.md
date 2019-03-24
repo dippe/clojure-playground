@@ -31,22 +31,22 @@ Simple perf test of different map implementations
   - "Elapsed time: 3485.683274 msecs"
   
   
-*I7 4 core results*
-rt/t_tesser
- 16384
-"Elapsed time: 4820.7045 msecs"
-rt/t_rmap
- 16384
-"Elapsed time: 1307.1558 msecs"
-rt/t_pmap_double
- 16384
-"Elapsed time: 396.1423 msecs"
-rt/t_pmap_part
- 16384
-"Elapsed time: 1144.9652 msecs"
-rt/t_pmap_single
- 16384
-"Elapsed time: 324.94 msecs"
-rt/t_simple
- 16384
-"Elapsed time: 1111.4171 msecs"
+*I7 4 core (8HT) results*
+- rt/t_tesser
+  - 16384
+  - "Elapsed time: 4820.7045 msecs"
+- rt/t_rmap
+  - 16384
+  - "Elapsed time: 1307.1558 msecs"
+- rt/t_pmap_double
+  - 16384
+  - "Elapsed time: 396.1423 msecs"
+- rt/t_pmap_part
+  - 16384
+  - "Elapsed time: 1144.9652 msecs"
+- rt/t_pmap_single
+  - 16384
+  - "Elapsed time: 324.94 msecs"
+- rt/t_simple
+  - 16384
+  - "Elapsed time: 1111.4171 msecs"

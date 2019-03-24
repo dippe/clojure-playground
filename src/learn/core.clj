@@ -9,7 +9,7 @@
 
 ; min size is 101 otherwise the partitioning won't work properly in some cases
 (def ^:const size 50000)
-(def ^:const line-length 400)
+(def ^:const line-length 1000)
 (def ^:const pattern #"(?i)199")
 
 ; fully random data
@@ -29,14 +29,15 @@
          ) flist)
   )
 
-(defn all-bench-ugly [pattern init-data]
-  (time ( println "rt/t_tesser \n" ( rt/t_tesser pattern init-data)))
-  (time ( println "rt/t_rmap \n" ( rt/t_rmap pattern init-data)))
-  (time ( println "rt/t_pmap_double \n" ( rt/t_pmap_double pattern init-data)))
-  (time ( println "rt/t_pmap_part \n" ( rt/t_pmap_part pattern init-data)))
-  (time ( println "rt/t_pmap_single \n" ( rt/t_pmap_single pattern init-data)))
-  (time ( println "rt/t_simple \n" ( rt/t_simple pattern init-data)))
-)
+(defn all-bench-ugly [pattern init-data partsize]
+  (time (println "rt/t_tesser \n" (rt/t_tesser pattern init-data partsize)))
+  (time (println "rt/t_rmap \n" (rt/t_rmap pattern init-data)))
+  (time (println "rt/t_pmap_double \n" (rt/t_pmap_double pattern init-data)))
+  (time (println "rt/t_pmap_part \n" (rt/t_pmap_part pattern init-data)))
+  (time (println "rt/t_pmap_single \n" (rt/t_pmap_single pattern init-data)))
+  (time (println "rt/t_simple \n" (rt/t_simple pattern init-data)))
+  (time (println "rt/t_future \n" (rt/t_future pattern init-data partsize)))
+  )
 
 (defn -main []
   (println "Simple perf test of different map implementations")
@@ -50,9 +51,13 @@
   ;                })
 
   ;pre-load init-data
-  (nth init-data (- size 1))
+  (println "init test data \n")
+  (rt/t_simple pattern init-data)
+  (println "Start tests: \n")
 
-  (all-bench-ugly pattern init-data)
+  ;(nth init-data (- size 1))
+
+  (all-bench-ugly pattern init-data 1000)
   (System/exit 0)
   )
 
