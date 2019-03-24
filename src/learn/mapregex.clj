@@ -70,5 +70,20 @@
                        (t/count)
                        (t/tesser (partition 100 init-data))
 
-                       )
+
+(defn t_future [pattern init-data partsize] (->>
+                                     init-data
+                                     (partition partsize)
+                                     (map (fn [lines]
+                                            (future
+                                                        (->> lines
+                                                             (map #(clojure.string/join %))
+                                                             (map #(re-find pattern %))
+                                                             (remove nil?)
+                                                             )
+                                                        ))
+                                     )
+                                     (reduce (fn [acc curr] (into acc @curr)) [])
+                                     (count)
+                                     )
   )
