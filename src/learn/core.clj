@@ -40,7 +40,7 @@
   (time (println "rt/t_future \n" (rt/t_future pattern init-data partsize)))
   )
 
-(defn -main [& partsize-str]
+(defn -main [& [partsize-str]]
   (let [partsize (if partsize-str (Integer. partsize-str) default-partsize)]
     (println "Simple perf test of different map implementations")
     (println "Partition size: " partsize)
