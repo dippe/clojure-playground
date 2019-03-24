@@ -7,6 +7,10 @@
 ;(require '[learn.mapregex :as rt])
 ;(use '[learn.mapregex])
 
+(def count 100000)
+
+(def init-data (repeat count (range 1100)))
+
 (defn all-bench [num flist]
   (map (fn [name undertest]
          (println "** " name)
@@ -15,13 +19,13 @@
          ) flist)
   )
 
-(defn all-bench-ugly [num]
-  (time ( println "rt/t_tesser \n" ( rt/t_tesser num )))
-  (time ( println "rt/t_rmap \n" ( rt/t_rmap num )))
-  (time ( println "rt/t_pmap_double \n" ( rt/t_pmap_double num )))
-  (time ( println "rt/t_pmap_part \n" ( rt/t_pmap_part num )))
-  (time ( println "rt/t_pmap_single \n" ( rt/t_pmap_single num )))
-  (time ( println "rt/t_simple \n" ( rt/t_simple num )))
+(defn all-bench-ugly [init-data]
+  (time ( println "rt/t_tesser \n" ( rt/t_tesser init-data)))
+  (time ( println "rt/t_rmap \n" ( rt/t_rmap init-data)))
+  (time ( println "rt/t_pmap_double \n" ( rt/t_pmap_double init-data)))
+  (time ( println "rt/t_pmap_part \n" ( rt/t_pmap_part init-data)))
+  (time ( println "rt/t_pmap_single \n" ( rt/t_pmap_single init-data)))
+  (time ( println "rt/t_simple \n" ( rt/t_simple init-data)))
 )
 
 (defn -main []
@@ -35,7 +39,10 @@
   ;                "t_simple"      rt/t_simple
   ;                })
 
-  (all-bench-ugly 100000)
+  ;pre-load init-data
+  (nth init-data (- count 1))
+
+  (all-bench-ugly init-data)
   (System/exit 0)
   )
 
