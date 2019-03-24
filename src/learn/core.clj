@@ -8,8 +8,9 @@
 ;(use '[learn.mapregex])
 
 ; min size is 101 otherwise the partitioning won't work properly in some cases
+(def ^:const default-partsize 100)
 (def ^:const size 50000)
-(def ^:const line-length 1000)
+(def ^:const line-length 500)
 (def ^:const pattern #"(?i)199")
 
 ; fully random data
@@ -39,25 +40,29 @@
   (time (println "rt/t_future \n" (rt/t_future pattern init-data partsize)))
   )
 
-(defn -main []
-  (println "Simple perf test of different map implementations")
-  ;(all-bench 100 {
-  ;                "t_tesser"      rt/t_tesser
-  ;                "t_rmap"        rt/t_rmap
-  ;                "t_pmap_double" rt/t_pmap_double
-  ;                "t_pmap_part"   rt/t_pmap_part
-  ;                "t_pmap_single" rt/t_pmap_single
-  ;                "t_simple"      rt/t_simple
-  ;                })
+(defn -main [& partsize-str]
+  (let [partsize (if partsize-str (Integer. partsize-str) default-partsize)]
+    (println "Simple perf test of different map implementations")
+    (println "Partition size: " partsize)
+    ;(all-bench 100 {
+    ;                "t_tesser"      rt/t_tesser
+    ;                "t_rmap"        rt/t_rmap
+    ;                "t_pmap_double" rt/t_pmap_double
+    ;                "t_pmap_part"   rt/t_pmap_part
+    ;                "t_pmap_single" rt/t_pmap_single
+    ;                "t_simple"      rt/t_simple
+    ;                })
 
-  ;pre-load init-data
-  (println "init test data \n")
-  (rt/t_simple pattern init-data)
-  (println "Start tests: \n")
+    ;pre-load init-data
 
-  ;(nth init-data (- size 1))
+    (println "init test data \n")
+    (rt/t_simple pattern init-data)
+    (println "Start tests: \n")
 
-  (all-bench-ugly pattern init-data 1000)
+    ;(nth init-data (- size 1))
+
+    (all-bench-ugly pattern init-data partsize)
+    )
   (System/exit 0)
   )
 
